@@ -67,3 +67,36 @@
 .read-more:hover {
   text-decoration: underline;
 }
+
+.loading, .error, .no-articles {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+}
+
+.loading {
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+}
+
+.no-articles {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.meta-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.article-category {
+  background-color: #f0f8ff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #007bff;
+}
