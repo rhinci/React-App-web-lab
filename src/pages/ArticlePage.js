@@ -2,11 +2,7 @@ import React from 'react';
 import Article from '../components/Article';
 
 function ArticlePage() {
-  return (
-    <div>
-      <Article />
-    </div>
-  );
+  return <Article />;
 }
 
 export default ArticlePage;

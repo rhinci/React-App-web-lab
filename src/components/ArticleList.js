@@ -57,14 +57,14 @@ function ArticleList() {
         <p className="no-articles">Статей пока нет</p>
       ) : (
         <div className="articles-container">
-          {articles.map(article => (
+          {articles.map((article) => (
             <div key={article.id} className="article-card">
               <h3 className="article-title">
                 <Link to={`/article/${article.id}`}>{article.title}</Link>
               </h3>
               <p className="article-excerpt">
-                {article.text.length > 150 
-                  ? `${article.text.substring(0, 150)}...` 
+                {article.text.length > 150
+                  ? `${article.text.substring(0, 150)}...`
                   : article.text}
               </p>
               <div className="article-meta">
@@ -77,7 +77,7 @@ function ArticleList() {
                   </span>
                 </div>
                 <Link to={`/article/${article.id}`} className="read-more">
-                  Читать далее 
+                  Читать далее
                 </Link>
               </div>
             </div>
