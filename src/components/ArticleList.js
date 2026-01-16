@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { articlesApi } from '../api/articles';
+import ErrorDisplay from './ErrorDisplay';
 import './ArticleList.css';
 
 function ArticleList() {
@@ -8,22 +9,36 @@ function ArticleList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setLoading(true);
-        const response = await articlesApi.getAll();
-        setArticles(response.data);
-      } catch (err) {
-        setError('Ошибка при загрузке статей');
-        console.error('Error fetching articles:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchArticles = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await articlesApi.getAll();
+      setArticles(response.data);
+    } catch (err) {
+      setError('Не удалось загрузить статьи. Проверьте подключение к серверу.');
+      console.error('Error fetching articles:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchArticles();
-  }, []); // Пустой массив зависимостей = выполнить только при монтировании
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <ErrorDisplay 
+        message={error}
+        onRetry={fetchArticles}
+      />
+    );
+  }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -72,9 +87,7 @@ function ArticleList() {
                   <span className="article-date">
                     {formatDate(article.created_date)}
                   </span>
-                  <span className="article-category">
-                    🏷️ {article.category}
-                  </span>
+                  <span className="article-category">{article.category}</span>
                 </div>
                 <Link to={`/article/${article.id}`} className="read-more">
                   Читать далее

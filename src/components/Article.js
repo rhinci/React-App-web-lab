@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { articlesApi } from '../api/articles';
+import ErrorDisplay from './ErrorDisplay';
 import './Article.css';
 
 function Article() {
@@ -9,24 +10,42 @@ function Article() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchArticle = async () => {
-      try {
-        setLoading(true);
-        const response = await articlesApi.getById(id);
-        setArticle(response.data);
-      } catch (err) {
-        setError('Статья не найдена или произошла ошибка');
-        console.error('Error fetching article:', err);
-      } finally {
-        setLoading(false);
+  const fetchArticle = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await articlesApi.getById(id);
+      setArticle(response.data);
+    } catch (err) {
+      if (err.response?.status === 404) {
+        setError('Статья не найдена');
+      } else {
+        setError('Не удалось загрузить статью');
       }
-    };
+      console.error('Error fetching article:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     if (id) {
       fetchArticle();
     }
   }, [id]);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <ErrorDisplay 
+        message={error}
+        onRetry={fetchArticle}
+      />
+    );
+  }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -97,7 +116,7 @@ function Article() {
 
       <div className="article-footer">
         <a href="/" className="back-link">
-          ← Вернуться к статьям
+          Вернуться к статьям
         </a>
       </div>
     </div>
