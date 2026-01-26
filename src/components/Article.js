@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { articlesApi } from '../api/articles';
 import ErrorDisplay from './ErrorDisplay';
 import './Article.css';
+import Loader from './Loader';
 
 function Article() {
   const { id } = useParams();
@@ -39,12 +40,7 @@ function Article() {
   }
 
   if (error) {
-    return (
-      <ErrorDisplay 
-        message={error}
-        onRetry={fetchArticle}
-      />
-    );
+    return <ErrorDisplay message={error} onRetry={fetchArticle} />;
   }
 
   const formatDate = (dateString) => {

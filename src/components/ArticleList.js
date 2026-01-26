@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { articlesApi } from '../api/articles';
 import ErrorDisplay from './ErrorDisplay';
 import './ArticleList.css';
+import Loader from './Loader';
 
 function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -32,12 +33,7 @@ function ArticleList() {
   }
 
   if (error) {
-    return (
-      <ErrorDisplay 
-        message={error}
-        onRetry={fetchArticles}
-      />
-    );
+    return <ErrorDisplay message={error} onRetry={fetchArticles} />;
   }
 
   const formatDate = (dateString) => {

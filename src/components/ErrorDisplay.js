@@ -11,7 +11,9 @@ function ErrorDisplay({ message, onRetry }) {
           Попробовать снова
         </button>
       )}
-      <a href="/" className="home-link">На главную</a>
+      <a href="/" className="home-link">
+        На главную
+      </a>
     </div>
   );
 }
