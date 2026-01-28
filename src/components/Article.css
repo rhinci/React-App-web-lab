@@ -77,3 +77,7 @@
 .error, .not-found {
   color: #dc3545;
 }
+
+.comments-wrapper {
+  margin-top: 40px;
+}

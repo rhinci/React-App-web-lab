@@ -4,6 +4,7 @@ import { articlesApi } from '../api/articles';
 import ErrorDisplay from './ErrorDisplay';
 import './Article.css';
 import Loader from './Loader';
+import CommentsSection from './CommentsSection';
 
 function Article() {
   const { id } = useParams();
@@ -115,8 +116,13 @@ function Article() {
           Вернуться к статьям
         </a>
       </div>
+
+      <div className="comments-wrapper">
+        <CommentsSection articleId={id} />
+      </div>
     </div>
   );
 }
 
 export default Article;
+

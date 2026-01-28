@@ -5,9 +5,9 @@ export const articlesApi = {
   getById: (id) => api.get(`/articles/${id}/`),
   getByCategory: (category) => api.get(`/articles/?category=${category}`),
   getSortedByDate: (order = 'desc') =>
-    api.get(
-      `/articles/?ordering=${order === 'desc' ? '-created_date' : 'created_date'}`
-    ),
+    api.get(`/articles/?ordering=${order === 'desc' ? '-created_date' : 'created_date'}`),
+  getPaginated: (page = 1, pageSize = 5) => 
+    api.get(`/articles/?page=${page}&page_size=${pageSize}`),
 };
 
 export const authApi = {
@@ -25,3 +25,9 @@ export const authApi = {
       password2 
     }),
 };
+
+export const commentsApi = {
+  getByArticle: (articleId) => api.get(`/articles/${articleId}/comments/`),
+  create: (articleId, data) => api.post('/comments/', data),
+};
+
