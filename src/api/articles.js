@@ -16,4 +16,12 @@ export const authApi = {
   refreshToken: (refresh) => api.post('/token/refresh/', { refresh }),
 
   verifyToken: (token) => api.post('/token/verify/', { token }),
+
+  register: (username, email, password, password2) => 
+    api.post('/register/', { 
+      username, 
+      email: email || '',
+      password, 
+      password2 
+    }),
 };

@@ -1,0 +1,85 @@
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 20px;
+}
+
+.register-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+}
+
+.register-card h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 28px;
+}
+
+.hint {
+  display: block;
+  margin-top: 5px;
+  color: #6c757d;
+  font-size: 12px;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+  text-align: center;
+}
+
+.register-button {
+  width: 100%;
+  padding: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.register-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.register-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.register-links {
+  margin-top: 25px;
+  text-align: center;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.register-links p {
+  margin: 10px 0;
+}
+
+.register-links a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-links a:hover {
+  text-decoration: underline;
+}
