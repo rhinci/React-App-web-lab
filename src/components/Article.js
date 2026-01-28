@@ -5,12 +5,14 @@ import ErrorDisplay from './ErrorDisplay';
 import './Article.css';
 import Loader from './Loader';
 import CommentsSection from './CommentsSection';
+import { useAuth } from '../context/AuthContext';
 
 function Article() {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user: currentUser } = useAuth();
 
   const fetchArticle = async () => {
     try {
@@ -116,6 +118,14 @@ function Article() {
           Вернуться к статьям
         </a>
       </div>
+
+      {currentUser && article.user && currentUser.id === article.user.id && (
+          <div className="article-actions">
+            <a href={`/edit-article/${article.id}`} className="edit-button">
+              Редактировать
+            </a>
+          </div>
+        )}
 
       <div className="comments-wrapper">
         <CommentsSection articleId={id} />

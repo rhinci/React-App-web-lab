@@ -23,6 +23,7 @@ function Header() {
         {isAuthenticated ? (
           <>
             <span className="welcome">Привет!</span>
+            <Link to="/create-article">Создать статью</Link>
             <button onClick={handleLogout} className="logout-button">
               Выйти
             </button>
