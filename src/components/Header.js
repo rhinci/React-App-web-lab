@@ -1,8 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Header.css';
 
 function Header() {
+  const { isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
+
   return (
     <header className="header">
       <div className="logo">
@@ -10,7 +19,22 @@ function Header() {
       </div>
       <nav className="nav">
         <Link to="/">Главная</Link>
-        <Link to="/login">Вход</Link>
+        
+        {isAuthenticated ? (
+          <>
+            <span className="welcome">Привет!</span>
+            <button onClick={handleLogout} className="logout-button">
+              Выйти
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Вход</Link>
+            <Link to="/register" className="register-button">
+              Регистрация
+            </Link>
+          </>
+        )}
       </nav>
     </header>
   );

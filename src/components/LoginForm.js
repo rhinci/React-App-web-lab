@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '../api/articles';
 import './LoginForm.css';
+import { useAuth } from '../context/AuthContext';
+
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -27,9 +30,7 @@ function LoginForm() {
 
     try {
       const response = await authApi.login(formData.username, formData.password);
-      localStorage.setItem('access_token', response.data.access);
-      localStorage.setItem('refresh_token', response.data.refresh);
-
+      login(response.data.access, response.data.refresh);
       navigate('/');
       
     } catch (err) {
